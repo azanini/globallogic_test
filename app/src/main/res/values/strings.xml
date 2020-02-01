@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">The NoteList</string>
+    <string name="error_screen_retry">Retry!</string>
+    <string name="no_internet_explanation">Sorry, but it seems that you don\'t have any internet connection!</string>
+</resources>

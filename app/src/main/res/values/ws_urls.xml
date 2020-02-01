@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="WS_URL_GET_NOTEBOOKS">/list</string>
+
+</resources>
