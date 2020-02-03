@@ -55,4 +55,14 @@ public class DetailActivity extends CustomActivity {
     public void setToolbar() {
         ((Toolbar) findViewById(R.id.toolbar_container)).setTitle(notebook.getTitle());
     }
+
+    @Override
+    public Boolean screenNeedsToBeFilledWithData() {
+        return Boolean.FALSE;
+    }
+
+    @Override
+    public void fillScreenWithData() {
+
+    }
 }

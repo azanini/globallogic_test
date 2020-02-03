@@ -10,4 +10,8 @@ public interface LayoutInterface {
 
     void setTypefaces();
 
+    Boolean screenNeedsToBeFilledWithData();
+
+    void fillScreenWithData();
+
 }

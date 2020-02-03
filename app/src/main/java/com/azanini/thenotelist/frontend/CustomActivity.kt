@@ -23,6 +23,7 @@ abstract class CustomActivity : AppCompatActivity(), LayoutInterface, DataInterf
         findViewById<Button>(R.id.retryButton).setOnClickListener {
             getAllData()
         }
+        findViewById<Button>(R.id.retryButton).setOnClickListener { getAllData() }
     }
 
     override fun setMainContentView(mainContentView: View) {
@@ -46,6 +47,10 @@ abstract class CustomActivity : AppCompatActivity(), LayoutInterface, DataInterf
                 getAllData()
             } else {
                 toggleNoConnectionScreen(java.lang.Boolean.TRUE, java.lang.Boolean.FALSE, "")
+            }
+        }else{
+            if (screenNeedsToBeFilledWithData()){
+                fillScreenWithData()
             }
         }
     }
