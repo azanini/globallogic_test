@@ -57,7 +57,18 @@ public class MainActivity extends CustomActivity {
 
     @Override
     public void setToolbar() {
-         ((Toolbar) findViewById(R.id.toolbar_container)).setTitle(getString(R.string.app_name));
+        ((Toolbar) findViewById(R.id.toolbar_container)).setTitle(getString(R.string.app_name));
+    }
+
+    @Override
+    public Boolean screenNeedsToBeFilledWithData() {
+        RecyclerView recyclerView = findViewById(R.id.myNotebookListView);
+        return recyclerView.getAdapter() == null;
+    }
+
+    @Override
+    public void fillScreenWithData() {
+        loadNotebooksDataOnList();
     }
 
     private void getNotebooks() {
@@ -66,7 +77,9 @@ public class MainActivity extends CustomActivity {
             public void onResponse(GetNotebooksResponse response) {
                 if (response != null) {
                     if (response.getErrorCode().intValue() == NO_ERROR) {
-                        loadNotebooksDataOnList(response.getNotebooks());
+                        toggleNoConnectionScreen(Boolean.FALSE, Boolean.FALSE, null);
+                        notebooks = response.getNotebooks();
+                        loadNotebooksDataOnList();
                     } else {
                         if (response.getErrorCode().intValue() == NO_CONNECTION_ERROR) {
                             toggleNoConnectionScreen(Boolean.TRUE, Boolean.FALSE, null);
@@ -81,8 +94,7 @@ public class MainActivity extends CustomActivity {
         });
     }
 
-    private void loadNotebooksDataOnList(ArrayList<Notebook> notebooks) {
-        this.notebooks = notebooks;
+    private void loadNotebooksDataOnList() {
         RecyclerView recyclerView = findViewById(R.id.myNotebookListView);
         recyclerView.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
