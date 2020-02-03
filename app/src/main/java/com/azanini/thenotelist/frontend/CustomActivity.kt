@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.azanini.thenotelist.R
 import com.azanini.thenotelist.extensions.conectedToInternet
@@ -18,7 +19,6 @@ abstract class CustomActivity : AppCompatActivity(), LayoutInterface, DataInterf
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom)
-        setToolbar()
         setTypefaces()
         findViewById<Button>(R.id.retryButton).setOnClickListener {
             getAllData()
@@ -40,6 +40,7 @@ abstract class CustomActivity : AppCompatActivity(), LayoutInterface, DataInterf
 
     override fun onResume() {
         super.onResume()
+        setToolbar()
         if (isDataNull) {
             if (isConnected()) {
                 getAllData()

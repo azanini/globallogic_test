@@ -42,7 +42,7 @@ public class MainActivity extends CustomActivity {
     @Override
     protected void onRestoreInstanceState(@NotNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        notebooks = savedInstanceState.getParcelable("notebooks");
+        notebooks = savedInstanceState.getParcelableArrayList("notebooks");
     }
 
     @Override
@@ -57,7 +57,7 @@ public class MainActivity extends CustomActivity {
 
     @Override
     public void setToolbar() {
-        // ((Toolbar) findViewById(R.id.my_toolbar)).setTitle(getString(R.string.app_name));
+         ((Toolbar) findViewById(R.id.toolbar_container)).setTitle(getString(R.string.app_name));
     }
 
     private void getNotebooks() {
@@ -88,7 +88,7 @@ public class MainActivity extends CustomActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter mAdapter = new NotebookListAdapter(getBaseContext(), notebooks);
+        RecyclerView.Adapter mAdapter = new NotebookListAdapter(this, notebooks);
         recyclerView.setAdapter(mAdapter);
     }
 }
