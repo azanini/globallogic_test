@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/item_notebook"
     android:orientation="horizontal"
     android:foreground="?attr/selectableItemBackground"
     android:baselineAligned="false">
@@ -38,6 +39,7 @@
         <TextView
             android:id="@+id/description"
             android:maxLines="3"
+            android:ellipsize="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -1,17 +1,18 @@
 package com.azanini.thenotelist.frontend.adapters;
 
 import android.content.Context;
-import android.graphics.Typeface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.azanini.thenotelist.R;
 import com.azanini.thenotelist.entities.Notebook;
+import com.azanini.thenotelist.frontend.DetailActivity;
 import com.azanini.thenotelist.managers.TypeFaceManager;
 import com.azanini.thenotelist.utils.SquaredImageView;
 import com.bumptech.glide.Glide;
@@ -30,12 +31,14 @@ public class NotebookListAdapter extends RecyclerView.Adapter<NotebookListAdapte
         TextView title;
         TextView description;
         SquaredImageView image;
+        View item_notebook;
 
         MyNotebookViewHolder(View v) {
             super(v);
             title = v.findViewById(R.id.title);
             description = v.findViewById(R.id.description);
             image = v.findViewById(R.id.image);
+            item_notebook = v.findViewById(R.id.item_notebook);
         }
     }
 
@@ -63,16 +66,27 @@ public class NotebookListAdapter extends RecyclerView.Adapter<NotebookListAdapte
                 .load(notebook.getImage() == null || notebook.getImage().trim().isEmpty() ? R.drawable.sin_imagen : notebook.getImage())
                 .placeholder(notebook.getImage() == null || notebook.getImage().trim().isEmpty() ? R.drawable.sin_imagen : R.drawable.progress)
                 .into(holder.image);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "toast", Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.item_notebook.setTag(notebook);
+        holder.itemView.setOnClickListener(notebookClickListener);
+        if (position % 2 == 0) {
+            holder.item_notebook.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+        } else {
+            holder.item_notebook.setBackgroundColor(ContextCompat.getColor(context, R.color.someScaleOfGray));
+        }
     }
 
     @Override
     public int getItemCount() {
         return this.data.size();
     }
+
+    private View.OnClickListener notebookClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Notebook notebook = (Notebook) v.getTag();
+            Intent detailIntent = new Intent(context, DetailActivity.class);
+            detailIntent.putExtra("notebook", notebook);
+            context.startActivity(detailIntent);
+        }
+    };
 }
